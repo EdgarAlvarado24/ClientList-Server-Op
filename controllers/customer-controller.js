@@ -1,6 +1,18 @@
 const { Sequelize, Op } = require('sequelize'); // Añade esta línea para importar Op
 const Customer = require('../models/customer-models');
 
+exports.getAllCustomers = async (req, res) => {
+  try {
+    const customers = await Customer.findAll({
+      limit: 100
+    });
+    res.json(customers);
+  } catch (error) {
+    console.error('Error getting customers:', error);
+    res.status(500).json({ error: 'Error al obtener clientes', details: error.message });
+  }
+};
+
 exports.searchCustomers = async (req, res) => {
   try {
     const { searchTerm, searchType } = req.query;
@@ -13,13 +25,13 @@ exports.searchCustomers = async (req, res) => {
     let whereCondition = {};
     if (searchType === 'name') {
       whereCondition = {
-        name: {
+        nombre: {
           [Op.iLike]: `%${searchTerm}%` // Cambia Sequelize.Op.iLike por Op.iLike
         }
       };
     } else if (searchType === 'phone') {
       whereCondition = {
-        phone: {
+        telefono: {
           [Op.like]: `%${searchTerm}%` // Cambia Sequelize.Op.like por Op.like
         }
       };

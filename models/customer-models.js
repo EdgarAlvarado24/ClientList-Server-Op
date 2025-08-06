@@ -7,11 +7,11 @@ const Customer = sequelize.define('Customer', {
     primaryKey: true,
     autoIncrement: true
   },
-  name: {
+  nombre: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  phone: {
+  telefono: {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true
@@ -28,8 +28,8 @@ const Customer = sequelize.define('Customer', {
     allowNull: true
   }
 }, {
-  tableName: 'customers',
-  timestamps: true
+  tableName: 'clientes',
+  timestamps: false
 });
 
 module.exports = Customer;
