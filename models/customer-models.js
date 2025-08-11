@@ -76,15 +76,27 @@ Customer.searchCustomers = async function(searchTerm, searchType) {
     }
 
     let whereCondition = {};
-    if (searchType === 'name') {
+    if (searchType === 'nombre') {
       whereCondition = {
         nombre: {
           [Op.iLike]: `%${searchTerm}%`
         }
       };
-    } else if (searchType === 'phone') {
+    } else if (searchType === 'telefono') {
       whereCondition = {
         telefono: {
+          [Op.like]: `%${searchTerm}%`
+        }
+      };
+    }else if (searchType === 'address') {
+      whereCondition = {
+        address: {
+          [Op.like]: `%${searchTerm}%`
+        }
+      };
+    }else if (searchType === 'email') {
+      whereCondition = {
+        email: {
           [Op.like]: `%${searchTerm}%`
         }
       };
